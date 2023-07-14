@@ -1,4 +1,12 @@
+let isPaused = false;
+let isEraserEnabled = false;
+
 function generateSquares() {
+
+    if (isPaused){
+        return;
+    }
+
     let container = document.querySelector('#container');
   
     for (let i = 0; i < 256; i++) {
@@ -12,8 +20,41 @@ function generateSquares() {
   
       container.appendChild(content);
     }
-  }
-  
-  generateSquares();
 
-  
+  }
+
+  function eraserFunc() {
+    isPaused = true;
+    isEraserEnabled = true;
+
+    let hoveredSquares = document.querySelectorAll('.hovered');
+    hoveredSquares.forEach((square) => {
+      square.addEventListener('mouseenter', function() {
+        square.classList.remove('hovered');
+      });
+    });
+  }
+
+  function newSketchFunc(){
+        let hoveredSquares = document.querySelectorAll('.hovered');
+        hoveredSquares.forEach((square) => {   
+            square.classList.remove('hovered');
+    });
+  }
+
+  /*buttons */
+  const start = document.querySelector('#start');
+    start.addEventListener('click', () =>{
+        generateSquares();
+    });
+
+  const eraser = document.querySelector('#eraser');
+    eraser.addEventListener('click', () =>{
+        eraserFunc();
+    });
+
+    const newSketch = document.querySelector('#newSketch');
+        newSketch.addEventListener('click', ()  =>{
+            newSketchFunc();
+    });
+
