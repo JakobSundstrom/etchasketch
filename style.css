@@ -32,3 +32,19 @@
   background-color: blue;
   color: white;
 }
+
+.glow {
+  animation: glowAnimation 1s infinite;
+}
+
+@keyframes glowAnimation {
+  0% {
+      box-shadow: 0 0 5px #ff0000;
+  }
+  50% {
+      box-shadow: 0 0 20px #382121;
+  }
+  100% {
+      box-shadow: 0 0 5px #0c9429;
+  }
+}

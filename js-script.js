@@ -21,7 +21,10 @@ function startPainting() {
 }
 
 const paintBtn = document.querySelector('#paintBtn');
-paintBtn.addEventListener('click', startPainting);
+paintBtn.addEventListener('click', () => {
+  startPainting();
+  addGlowEffect();
+});
 
 makeRows(16, 16);
 
@@ -66,6 +69,7 @@ function paintRandColor(){
 const randColorBtn = document.querySelector('#randColorBtn');
     randColorBtn.addEventListener('click', () => {
       paintRandColor();
+      addGlowEffect();
     });
 
 
@@ -76,6 +80,21 @@ function getRgbColor() {
   const b = Math.floor(Math.random() * 256);
 
   return `rgb(${r}, ${g}, ${b})`;
+}
+
+/*glow effect */
+function addGlowEffect() {
+
+  const cells = document.querySelectorAll('.grid-item');
+
+    cells.forEach((cell) => {
+      cell.addEventListener('mouseenter', function () {
+        cell.classList.add('glow');
+        setTimeout(() => {
+          cell.classList.remove('glow');
+        }, 1000);
+      });
+    });
 }
 
 function paintRbg(){
@@ -89,10 +108,12 @@ function paintRbg(){
   });
 }
 
-const rbgBtn = document.querySelector('#rgbBtn');
-  rbgBtn.addEventListener('click', () => {
-    paintRbg();
-  });
+const rgbBtn = document.querySelector('#rgbBtn');
+rgbBtn.addEventListener('click', () => {
+  paintRbg();
+  addGlowEffect();
+});
+
 
 
 
