@@ -115,5 +115,42 @@ rgbBtn.addEventListener('click', () => {
 });
 
 
+/*change color randomly on background grid */
+function changeColorsOn2x2Grid() {
+  const cells = document.querySelectorAll('.background-grid .background-item');
+  cells.forEach((cell) => {
+      cell.style.backgroundColor = getRgbColor();
+  });
+}
 
+function startChangingColors() {
+  changeColorsOn2x2Grid(); // Change colors immediately
+  addGlowEffect();
+  setInterval(changeColorsOn2x2Grid, 1000); // Change colors every 3 seconds
+}
 
+startChangingColors();
+
+/*change color slowly on left side */
+
+function getRandomBlackOrWhiteColor() {
+  // Generate a random number between 0 and 1
+  const randomNumber = Math.random();
+
+  // If the random number is greater than or equal to 0.5, return white, otherwise return black
+  return randomNumber >= 0.5 ? 'white' : 'black';
+}
+
+function changeColorsOnLeftSide() {
+  const cells = document.querySelectorAll('.background-grid .background-item-left');
+  cells.forEach((cell) => {
+      cell.style.backgroundColor = getRandomBlackOrWhiteColor();
+
+  });
+}
+
+function startChangingColorsLeft() {
+  changeColorsOnLeftSide(); 
+  setInterval(changeColorsOnLeftSide, 6000);
+}
+startChangingColorsLeft();

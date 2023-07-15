@@ -11,7 +11,18 @@
 <button id="randColorBtn">Random Color</button>
 <button id="rgbBtn">Red Blue Green</button>
 <button id="sizeBtn">Change Size</button>
+
+<label for="rowSlider">Rows:</label>
+    <input type="range" id="rowSlider" min="1" max="50" value="16">
+    <label for="columnSlider">Columns:</label>
+    <input type="range" id="columnSlider" min="1" max="50" value="16">
+    
 <body>
+    <div class="background-grid">
+        <div class="background-item-left"></div>
+        <div class="background-item"></div>
+    </div>
+
     <div class="container" id="container"></div>
 </body>
 </html>

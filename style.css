@@ -1,21 +1,66 @@
+html, body {
+  height: 0px;
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+
+.background-grid {
+  --grid-rows: 2;
+  --grid-cols: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Cover the entire viewport horizontally */
+  height: 100vh; /* Cover the entire viewport vertically */
+  display: grid;
+  grid-template-rows: repeat(var(--grid-rows), 1fr); /* Distribute available height equally */
+  grid-template-columns: repeat(var(--grid-cols), 1fr); /* Distribute available width equally */
+  z-index: -1; /* Push the background grid to the back */
+}
+.background-item-left{
+  padding: 0;
+  width: 100%;
+  height: 200%;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-color 6s ease; 
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.background-item {
+  padding: 0;
+  width: 100%;
+  height: 200%;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-color 0.5s ease; 
+
+}
+
 #container {
-  margin: auto;
-  width: 480px;
-  height: 480px;
+  margin: -10px 0px 0px 50.5%;
+  width: 49vw;
+  height: 97vh;
   display: grid;
   grid-template-rows: repeat(var(--grid-rows), 1fr);
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
-
+  grid-template-columns: repeat(var(--grid-cols), 1fr); 
+  flex: wrap;
   gap: 1px;
   overflow: hidden;
 }
 
 .grid-item {
-  padding: 0;
-  border: 1px solid #030000;
+
+  border: 1px solid black;
   text-align: center;
   box-sizing: border-box;
   overflow: hidden;
+  border-radius: 5px;
+  padding: 1;
 }
 
 .grid-item {
