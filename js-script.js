@@ -26,28 +26,15 @@ paintBtn.addEventListener('click', () => {
   addGlowEffect();
 });
 
+const reSketch = document.querySelector('#reSketch');
+  reSketch.addEventListener('click', () => {
+    container.innerHTML = '';
+    makeRows(16,16);
+  });
+
 makeRows(16, 16);
 
 
-
-
-const sizebtn = document.querySelector('#sizeBtn');
-    sizebtn.addEventListener('click', () => {
-        container.innerHTML = '';
-
-        var x = prompt("Enter rows: ", "16")
-        var y = prompt("Enter columns: ", "16")
-
-        var num1 = parseInt(x)
-        var num2 = parseInt(y)
-
-        if ((num1 || num2) > 100){
-            alert("Number too high!")
-        }
-
-        makeRows(num1,num2);
-
-    });
 
 /*random color */
 
@@ -154,3 +141,25 @@ function startChangingColorsLeft() {
   setInterval(changeColorsOnLeftSide, 6000);
 }
 startChangingColorsLeft();
+
+function setGridSize() {
+  const rowSlider = document.getElementById('rowSlider');
+  const columnSlider = document.getElementById('columnSlider');
+
+  const numRows = parseInt(rowSlider.value);
+  const numColumns = parseInt(columnSlider.value);
+
+  if (numRows > 100 || numColumns > 100) {
+      alert('Number too high!');
+      return;
+  }
+
+  container.innerHTML = '';
+  makeRows(numRows, numColumns);
+}
+
+const rowSlider = document.getElementById('rowSlider');
+const columnSlider = document.getElementById('columnSlider');
+
+rowSlider.addEventListener('input', setGridSize);
+columnSlider.addEventListener('input', setGridSize);

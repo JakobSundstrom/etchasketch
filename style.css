@@ -3,6 +3,116 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: grey;
+  font-family:monospace
+}
+h1 {
+  font-size: 36px;
+  position: relative;
+  color: #333;
+  text-align: center;
+  -webkit-text-stroke: 1px green;
+  /* Apply the glow animation to the ::after pseudo-element */
+  /* This creates the glow effect behind the text */
+}
+p{
+  color: #333;
+  display: flex;
+  margin: auto;
+  width: 200px;
+  font-size: 20px;
+  padding: 5px;
+  -webkit-text-stroke: 1px green;
+}
+
+h1::after {
+  content: attr(data-text); /* Use the same text as the h1 element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: glowAnimation 1s infinite;
+  color: #fff; /* Set the color of the glow to white */
+}
+
+
+button{
+  font-weight: 800;
+  color: #0c9429;
+  font-size: 24px;
+  padding: 20px;
+  font-family:monospace;
+  margin: 20px;
+  background-color: transparent;
+  animation: glowAnimation 3s infinite;
+}
+
+.buttons{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.sliders{
+  height: 100%;
+  width: 100%;
+
+}
+        /* Customize the sliders */
+        input[type="range"] {
+          /* Remove default track styles */
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 10px;
+          border-radius: 5px;
+          background-color: transparent;
+          outline: none;
+          margin: 5px 0;
+      }
+
+      /* Customize the slider track */
+      input[type="range"]::-webkit-slider-runnable-track {
+          width: 20px;
+          height: 30px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          margin-left: 5%;
+      }
+
+      /* Customize the slider thumb (handle) */
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          background: #4CAF50;
+          cursor: pointer;
+          border: 1px solid #ccc;
+          margin-top: 3px;
+      }
+
+      /* Customize the slider thumb when dragging */
+      input[type="range"]:active::-webkit-slider-thumb {
+          background: #45a049;
+      }
+
+.rowSlider,
+.columnSlider{
+  margin-top: 50px;
+  padding: 20px;
+  display: flex;
+
+}
+
+label{
+  font-weight: 800;
+  color: #0c9429;
+  font-size: 24px;
+  display: flex;
+  width: 20%;
+  justify-content: flex-end;
 }
 
 .background-grid {
@@ -26,8 +136,7 @@ html, body {
   box-sizing: border-box;
   overflow: hidden;
   transition: background-color 6s ease; 
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+
 }
 
 .background-item {

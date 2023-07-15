@@ -7,22 +7,40 @@
     <script src="./js-script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<button id="paintBtn">Start Painting</button>
-<button id="randColorBtn">Random Color</button>
-<button id="rgbBtn">Red Blue Green</button>
-<button id="sizeBtn">Change Size</button>
 
-<label for="rowSlider">Rows:</label>
-    <input type="range" id="rowSlider" min="1" max="50" value="16">
-    <label for="columnSlider">Columns:</label>
-    <input type="range" id="columnSlider" min="1" max="50" value="16">
-    
+
 <body>
+
     <div class="background-grid">
-        <div class="background-item-left"></div>
+        
+    <div class="background-item-left"> 
+     <h1 data-text="ETCH A SKETCH">ETCH A SKETCH</h1>
+     <div class="buttons">
+        <button id="paintBtn">Start Painting</button>
+        <button id="randColorBtn">Random Color</button>
+        <button id="rgbBtn">Red Blue Green</button>
+        <button id="reSketch">Reset Sketch</button>
+     </div>
+
+        <div class="sliders">
+                <div class="rowSlider">
+                    <label for="rowSlider">Rows:</label>
+                    <input type="range" id="rowSlider" min="4" max="50" value="16">
+                </div>
+                <div class="columnSlider">
+                    <label for="columnSlider">Columns:</label>
+                    <input type="range" id="columnSlider" min="4" max="50" value="16">
+                 </div>
+                 <p><a href="https://github.com/JakobSundstrom">by JakobSundstrom</a></p>
+        </div>
+    </div>
+
         <div class="background-item"></div>
+
     </div>
 
     <div class="container" id="container"></div>
+
+
 </body>
 </html>
