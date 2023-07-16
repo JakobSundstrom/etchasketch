@@ -12,10 +12,17 @@ function makeRows(rows, cols) {
 
 function startPainting() {
   const cells = document.querySelectorAll('.grid-item');
+  let selectedColor; // Declare selectedColor outside of the event listeners
+
+  const colorPicker = document.querySelector('#colorPicker');
+  colorPicker.addEventListener('change', () => {
+    selectedColor = colorPicker.value;
+    console.log(selectedColor); // Output the selected color value
+  });
 
   cells.forEach((cell) => {
     cell.addEventListener('mouseenter', function () {
-      cell.classList.add('hovered');
+      cell.style.backgroundColor = selectedColor;
     });
   });
 }
@@ -34,7 +41,6 @@ const reSketch = document.querySelector('#reSketch');
 
 makeRows(16, 16);
 
-/*create eraser*/
 
 
 /*random color */
@@ -85,20 +91,20 @@ function addGlowEffect() {
     });
 }
 
-function paintRbg(){
+function eraserFunc(){
 
   const cells = document.querySelectorAll('.grid-item');
 
   cells.forEach((cell) => {
     cell.addEventListener('mouseenter', function () {
-      cell.style.backgroundColor = getRgbColor();
+      cell.style.backgroundColor = "transparent";
     });
   });
 }
 
-const rgbBtn = document.querySelector('#rgbBtn');
-rgbBtn.addEventListener('click', () => {
-  paintRbg();
+const eraserBtn = document.querySelector('#eraserBtn');
+eraserBtn.addEventListener('click', () => {
+  eraserFunc();
   addGlowEffect();
 });
 
@@ -164,20 +170,3 @@ const columnSlider = document.getElementById('columnSlider');
 
 rowSlider.addEventListener('input', setGridSize);
 columnSlider.addEventListener('input', setGridSize);
-
-
-function eraserFunc() {
-  const cells = document.querySelectorAll('.grid-item');
-
-  cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', function () {
-      cell.style.backgroundColor = "transparent";
-    });
-  });
-}
-
-const eraserBtn = document.querySelector('#eraserBtn');
-  eraserBtn.addEventListener('click', () => {
-    eraserFunc();
-  });
-
