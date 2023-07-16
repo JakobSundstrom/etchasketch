@@ -127,18 +127,18 @@ startChangingColors();
 
 /*change color slowly on left side */
 
-function getRandomBlackOrWhiteColor() {
+function getRandomBlackOrGreyColor() {
   // Generate a random number between 0 and 1
   const randomNumber = Math.random();
 
   // If the random number is greater than or equal to 0.5, return white, otherwise return black
-  return randomNumber >= 0.5 ? 'white' : 'black';
+  return randomNumber >= 0.5 ? 'white' : 'lightgrey';
 }
 
 function changeColorsOnLeftSide() {
   const cells = document.querySelectorAll('.background-grid .background-item-left');
   cells.forEach((cell) => {
-      cell.style.backgroundColor = getRandomBlackOrWhiteColor();
+      cell.style.backgroundColor = getRandomBlackOrGreyColor();
 
   });
 }
