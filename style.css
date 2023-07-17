@@ -11,8 +11,6 @@ h1 {
   color: transparent;
   text-align: center;
   -webkit-text-stroke: 1px green;
-  /* Apply the glow animation to the ::after pseudo-element */
-  /* This creates the glow effect behind the text */
 }
 p{
   color: #333;
@@ -114,12 +112,12 @@ label{
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Cover the entire viewport horizontally */
-  height: 100vh; /* Cover the entire viewport vertically */
+  width: 100vw;
+  height: 100vh; 
   display: grid;
-  grid-template-rows: repeat(var(--grid-rows), 1fr); /* Distribute available height equally */
-  grid-template-columns: repeat(var(--grid-cols), 1fr); /* Distribute available width equally */
-  z-index: -1; /* Push the background grid to the back */
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr); 
+  z-index: -1;
 }
 .background-item-left{
   padding: 0;

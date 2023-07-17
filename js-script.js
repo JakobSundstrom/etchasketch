@@ -1,115 +1,82 @@
 const container = document.getElementById("container");
 
 function makeRows(rows, cols) {
-  container.style.setProperty('--grid-rows', rows);
-  container.style.setProperty('--grid-cols', cols);
-  for (c = 0; c < (rows * cols); c++) {
-    let cell = document.createElement("div");
-    cell.classList.add('grid-item');
-    container.appendChild(cell);
+  container.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+  container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+  for (let c = 0; c < rows * cols; c++) {
+    container.appendChild(document.createElement("div")).classList.add('grid-item');
   }
 }
 
+
 function startPainting() {
-  const cells = document.querySelectorAll('.grid-item');
-  let selectedColor; // Declare selectedColor outside of the event listeners
+  let selectedColor;
 
   const colorPicker = document.querySelector('#colorPicker');
   colorPicker.addEventListener('change', () => {
     selectedColor = colorPicker.value;
-    console.log(selectedColor); // Output the selected color value
+    console.log(selectedColor); 
   });
 
-  cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', function () {
-      cell.style.backgroundColor = selectedColor;
-    });
+  document.querySelectorAll('.grid-item').forEach((cell) => {
+    cell.addEventListener('mouseenter', () => cell.style.backgroundColor = selectedColor);
   });
 }
 
-const paintBtn = document.querySelector('#paintBtn');
-paintBtn.addEventListener('click', () => {
-  startPainting();
-  addGlowEffect();
-});
+/*let user choose options */
+document.querySelector('#paintBtn').addEventListener('click', () => { 
+  startPainting(); addGlowEffect(); });
 
-const reSketch = document.querySelector('#reSketch');
-  reSketch.addEventListener('click', () => {
-    container.innerHTML = '';
-    makeRows(16,16);
-  });
+document.querySelector('#reSketch').addEventListener('click', () => { 
+  container.innerHTML = ''; makeRows(16,16); addGlowEffect(); });
+
+document.querySelector('#randColorBtn').addEventListener('click', () => { 
+  paintRandColor(); addGlowEffect(); });
+
+document.querySelector('#eraserBtn').addEventListener('click', () => { 
+  eraserFunc(); addGlowEffect(); });
 
 makeRows(16, 16);
 
-
-
-/*random color */
+/* create functions attached to the buttons */
 
 function getRandomColor() {
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-function paintRandColor(){
-
-  const cells = document.querySelectorAll('.grid-item');
-
-  cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', function () {
-      cell.style.backgroundColor = getRandomColor();
-    });
+function paintRandColor() {
+  document.querySelectorAll('.grid-item').forEach((cell) => {
+    cell.addEventListener('mouseenter', () => cell.style.backgroundColor = getRandomColor());
   });
 }
 
-const randColorBtn = document.querySelector('#randColorBtn');
-    randColorBtn.addEventListener('click', () => {
-      paintRandColor();
-      addGlowEffect();
-    });
-
-
-/*rgb color */
-function getRgbColor() {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-
-  return `rgb(${r}, ${g}, ${b})`;
-}
 
 /*glow effect */
 function addGlowEffect() {
-
-  const cells = document.querySelectorAll('.grid-item');
-
-    cells.forEach((cell) => {
-      cell.addEventListener('mouseenter', function () {
-        cell.classList.add('glow');
-        setTimeout(() => {
-          cell.classList.remove('glow');
-        }, 1000);
-      });
-    });
-}
-
-function eraserFunc(){
-
-  const cells = document.querySelectorAll('.grid-item');
-
-  cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', function () {
-      cell.style.backgroundColor = "transparent";
+  document.querySelectorAll('.grid-item').forEach((cell) => {
+    cell.addEventListener('mouseenter', () => {
+      cell.classList.add('glow');
+      setTimeout(() => cell.classList.remove('glow'), 1000);
     });
   });
 }
 
-const eraserBtn = document.querySelector('#eraserBtn');
-eraserBtn.addEventListener('click', () => {
-  eraserFunc();
-  addGlowEffect();
-});
+function getRgbColor() {
+  return `rgb(${Math.floor(Math.random() * 256)}, 
+  ${Math.floor(Math.random() * 256)}, 
+  ${Math.floor(Math.random() * 256)})`;
+}
 
 
-/*change color randomly on background grid */
+function eraserFunc() {
+  document.querySelectorAll('.grid-item').forEach((cell) => {
+    cell.addEventListener('mouseenter', () => cell.style.backgroundColor = "transparent");
+  });
+}
+
+/* set up background environment */
+
 function changeColorsOn2x2Grid() {
   const cells = document.querySelectorAll('.background-grid .background-item');
   cells.forEach((cell) => {
@@ -118,36 +85,27 @@ function changeColorsOn2x2Grid() {
 }
 
 function startChangingColors() {
-  changeColorsOn2x2Grid(); // Change colors immediately
+  changeColorsOn2x2Grid(); 
   addGlowEffect();
-  setInterval(changeColorsOn2x2Grid, 1000); // Change colors every 3 seconds
+  setInterval(changeColorsOn2x2Grid, 1000); 
 }
 
 startChangingColors();
 
-/*change color slowly on left side */
 
 function getRandomBlackOrGreyColor() {
-  // Generate a random number between 0 and 1
-  const randomNumber = Math.random();
-
-  // If the random number is greater than or equal to 0.5, return white, otherwise return black
-  return randomNumber >= 0.5 ? 'white' : 'lightgrey';
+  return Math.random() >= 0.5 ? 'white' : 'lightgrey';
 }
 
 function changeColorsOnLeftSide() {
-  const cells = document.querySelectorAll('.background-grid .background-item-left');
-  cells.forEach((cell) => {
-      cell.style.backgroundColor = getRandomBlackOrGreyColor();
-
-  });
+  document.querySelectorAll('.background-grid .background-item-left')
+  .forEach((cell) => cell.style.backgroundColor = getRandomBlackOrGreyColor());
 }
+
 
 function startChangingColorsLeft() {
-  changeColorsOnLeftSide(); 
   setInterval(changeColorsOnLeftSide, 6000);
 }
-startChangingColorsLeft();
 
 function setGridSize() {
   const rowSlider = document.getElementById('rowSlider');
@@ -157,16 +115,21 @@ function setGridSize() {
   const numColumns = parseInt(columnSlider.value);
 
   if (numRows > 100 || numColumns > 100) {
-      alert('Number too high!');
-      return;
+    alert('Number too high!');
+    return;
   }
 
   container.innerHTML = '';
   makeRows(numRows, numColumns);
 }
 
+/*interactive way of chaning rows/columns */
+
 const rowSlider = document.getElementById('rowSlider');
 const columnSlider = document.getElementById('columnSlider');
 
 rowSlider.addEventListener('input', setGridSize);
 columnSlider.addEventListener('input', setGridSize);
+
+changeColorsOnLeftSide();
+startChangingColorsLeft();
