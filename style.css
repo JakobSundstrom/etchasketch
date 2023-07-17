@@ -17,10 +17,13 @@ p{
   display: flex;
   margin: auto;
   width: 200px;
-  font-size: 20px;
-  padding: 5px;
-  -webkit-text-stroke: 1px green;
-  margin-top: 100px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+a{
+  color: black;
+  margin-left: 10px;
 }
 
 
