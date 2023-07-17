@@ -10,7 +10,7 @@ h1 {
   position: relative;
   color: transparent;
   text-align: center;
-  -webkit-text-stroke: 1px green;
+  -webkit-text-stroke: 2px green;
 }
 p{
   color: #333;
